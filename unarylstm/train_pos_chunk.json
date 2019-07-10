@@ -1,0 +1,146 @@
+{
+	"task_pos":{
+		"task_description":{
+			"task_name": "pos",
+			"validation_metric_name": "accuracy",
+			"validation_metric_decreases": false,
+			"evaluate_on_test": false
+		},
+		
+		"data_params":{
+			"dataset_reader":{
+				"type": "pos_reader_test",
+				"label_namespace": "pos_labels",
+				"lazy": false,
+				"token_indexers": {
+					"tokens": {
+						"type": "single_id",
+						"lowercase_tokens": true
+					},
+					"token_characters":{
+						"type": "characters"
+					}
+				}
+			},
+			
+			"train_data_path": "./data//pos/data/train/",
+			"validation_data_path": "./data/pos/data/validation/",
+			"datasets_for_vocab_creation": ["train"]
+		}
+	},
+	
+	"task_chunk":{
+		"task_description":{
+			"task_name": "chunk",
+			"validation_metric_name": "f1-measure-overall",
+			"validation_metric_decreases": false,
+			"evaluate_on_test": false
+		},
+		"data_params":{
+			"dataset_reader": {
+				"type": "chunk_reader",
+				"tag_label": "chunk",
+				"lazy": false,
+                "label_namespace": "chunk_labels",
+                "label_encoding": "BIO",
+				"token_indexers": {
+					"tokens": {
+						"type": "single_id",
+						"lowercase_tokens": true
+					},
+					"token_characters":{
+						"type": "characters"
+					}
+				}
+			},
+			
+			"train_data_path": "./data//chunk/data/train.txt",
+			"validation_data_path": "./data//chunk/data/test.txt",
+			
+			"datasets_for_vocab_creation": ["train","validation"]
+		}
+	},	
+	"model": {
+		"type": "pos_chunk",
+		"text_field_embedder": {
+			"token_embedders": {
+				"tokens": {
+					"type": "embedding",
+					"pretrained_file": "./data/glove/glove.6B.100d.txt.gz",
+					"embedding_dim": 100,
+					"trainable": true
+				},
+				"token_characters": {
+					"type": "character_encoding",
+					"embedding": {
+						"embedding_dim": 16
+					},
+					"encoder": {
+						"type": "cnn",
+						"embedding_dim": 16,
+						"num_filters": 64,
+						"ngram_filter_sizes": [3]
+					},
+					"dropout": 0.2
+				}
+			}
+		},
+		"pos": {
+			"encoder": {
+				"type": "lstm",
+				"bidirectional": true,
+				"input_size": 164,
+				"hidden_size": 100,
+                "num_layers": 2,
+                "dropout": 0.2
+			},
+			"tagger": {
+                "label_namespace": "pos_labels"			 		
+			}
+		},
+		"chunk": {
+			"encoder": {
+				"type": "lstm",
+				"bidirectional": true,
+				"input_size": 364,
+				"hidden_size": 100,
+                "num_layers": 2,
+                "dropout": 0.2
+			},
+			"tagger": {
+				"label_namespace": "chunk_labels",
+                "label_encoding": "BIO",
+                "calculate_span_f1": true				 
+			}
+		}
+	},
+	"iterators": {
+		"iterator": {
+			"type": "basic",
+			"batch_size": 32
+		}
+	},
+	"multi_task_trainer": {
+		"type": "sampler_multi_task_trainer",
+		"sampling_method": "proportional",
+		"patience": 10,
+		"num_epochs": 40,
+		"min_lr": "1e-7",
+		"grad_norm": 5.0,
+		"grad_clipping": 10.0,
+		"cuda_device": -1,
+		"optimizer": {
+			"type": "adam", 
+			"lr": 0.001
+		},
+		"scheduler": {
+			"type": "reduce_on_plateau", 
+			"mode": "min", 
+			"factor": 0.5,
+			"patience": 5, 
+			"threshold": 0.0001,
+			"threshold_mode": "abs", 
+			"verbose": true
+		}
+	}
+}
