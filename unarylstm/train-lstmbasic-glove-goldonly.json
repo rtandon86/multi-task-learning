@@ -12,6 +12,8 @@
   },
   "train_data_path": "./data/swag/swag_train.csv",
   "validation_data_path": "./data/swag/swag_val.csv",
+  "test_data_path": "./data/swag/swag_test.csv",
+  "evaluate_on_test": true,
   "model": {
     "type": "lstm_swag",
     "text_field_embedder": {
