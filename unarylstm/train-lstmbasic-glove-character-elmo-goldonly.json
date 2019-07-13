@@ -16,16 +16,16 @@
     "use_only_gold_examples": true,
     "only_end": false
   },
-  "train_data_path": "./data/swag/swag_train.csv",
-  "validation_data_path": "./data/swag/swag_val.csv",
-  "test_data_path": "./data/swag/swag_test.csv",
+  "train_data_path": "./mtl_data/swag/swag_train.csv",
+  "validation_data_path": "./mtl_data/swag/swag_val.csv",
+  "test_data_path": "./mtl_data/swag/swag_test.csv",
   "evaluate_on_test": true,
   "model": {
     "type": "lstm_swag",
     "text_field_embedder": {
       "tokens": {
         "type": "embedding",
-        "pretrained_file": "./data/glove/glove.6B.100d.txt.gz",
+        "pretrained_file": "./mtl_data/glove/glove.6B.100d.txt.gz",
         "embedding_dim": 100,
         "trainable": true
       },
@@ -44,8 +44,8 @@
       },
       "elmo":{
         "type": "elmo_token_embedder",
-       "options_file": "./data/elmo/elmo_2x4096_512_2048cnn_2xhighway_options.json",
-       "weight_file": "./data/elmo/2x4096_512_2048cnn_2xhighway_weights.hdf5",
+       "options_file": "./mtl_data/elmo/elmo_2x4096_512_2048cnn_2xhighway_options.json",
+       "weight_file": "./mtl_data/elmo/2x4096_512_2048cnn_2xhighway_weights.hdf5",
         "do_layer_norm": false,
         "dropout": 0.2
       }
