@@ -13,7 +13,7 @@
             }
         }
     },
-    "train_data_path": "./data//pos/data/train/",
+    "train_data_path": "./data/pos/data/train/",
     "validation_data_path": "./data/pos/data/validation/",
     "test_data_path": "./data/pos/data/test/",
     "evaluate_on_test": true,
@@ -37,9 +37,7 @@
                         "type": "cnn",
                         "embedding_dim": 16,
                         "num_filters": 64,
-                        "ngram_filter_sizes": [
-                            5
-                        ]
+                        "ngram_filter_sizes": [3]
                     },
                     "dropout": 0.2
                 }

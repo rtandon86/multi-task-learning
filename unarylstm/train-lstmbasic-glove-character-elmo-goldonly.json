@@ -27,7 +27,7 @@
         "type": "embedding",
         "pretrained_file": "./data/glove/glove.6B.100d.txt.gz",
         "embedding_dim": 100,
-        "trainable": false
+        "trainable": true
       },
       "token_characters": {
           "type": "character_encoding",
@@ -38,7 +38,7 @@
               "type": "cnn",
               "embedding_dim": 16,
               "num_filters": 64,
-              "ngram_filter_sizes": [5]
+              "ngram_filter_sizes": [3]
           },
           "dropout": 0.2
       },

@@ -4,7 +4,7 @@
 			"task_name": "pos",
 			"validation_metric_name": "accuracy",
 			"validation_metric_decreases": false,
-			"evaluate_on_test": false
+			"evaluate_on_test": true
 		},
 		
 		"data_params":{
@@ -28,6 +28,7 @@
 			
 			"train_data_path": "./data/pos/data/train/",
 			"validation_data_path": "./data/pos/data/validation/",
+			"test_data_path": "./data/pos/data/test/",
 			"datasets_for_vocab_creation": ["train"]
 		}
 	},
@@ -37,7 +38,7 @@
 			"task_name": "chunk",
 			"validation_metric_name": "f1-measure-overall",
 			"validation_metric_decreases": false,
-			"evaluate_on_test": false
+			"evaluate_on_test": true
 		},
 		"data_params":{
 			"dataset_reader": {
@@ -61,9 +62,9 @@
 			},
 			
 			"train_data_path": "./data/chunk/data/train.txt",
-			"validation_data_path": "./data/chunk/data/test.txt",
-			
-			"datasets_for_vocab_creation": ["train","validation"]
+			"validation_data_path": "./data/chunk/data/validation.txt",
+			"test_data_path": "./data/chunk/data/test.txt",
+			"datasets_for_vocab_creation": ["train","validation","test"]
 		}
     },	
     "task_lm":{
@@ -71,7 +72,7 @@
 			"task_name": "lm",
 			"validation_metric_name": "accuracy",
 			"validation_metric_decreases": false,
-			"evaluate_on_test": false
+			"evaluate_on_test": true
 		},
 		"data_params":{
 			"dataset_reader": {
@@ -94,7 +95,7 @@
 			
 			"train_data_path": "./data/swag/swag_train.csv",
 			"validation_data_path": "./data/swag/swag_val.csv",
-			
+			"test_data_path": "./data/swag/swag_test.csv",
 			"datasets_for_vocab_creation": ["train"]
 		}
 	},
@@ -126,7 +127,7 @@
                    "options_file": "./data/elmo/elmo_2x4096_512_2048cnn_2xhighway_options.json",
                    "weight_file": "./data/elmo/2x4096_512_2048cnn_2xhighway_weights.hdf5",
                     "do_layer_norm": false,
-                    "dropout": 0.5
+                    "dropout": 0.2
                   }
 			}
 		},

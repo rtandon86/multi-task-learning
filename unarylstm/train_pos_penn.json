@@ -36,9 +36,7 @@
                         "type": "cnn",
                         "embedding_dim": 8,
                         "num_filters": 50,
-                        "ngram_filter_sizes": [
-                            5
-                        ]
+                        "ngram_filter_sizes": [3]
                     },
                     "dropout": 0.2
                 }
