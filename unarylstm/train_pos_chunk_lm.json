@@ -184,7 +184,7 @@
 		"min_lr": "1e-7",
 		"grad_norm": 5.0,
 		"grad_clipping": 10.0,
-		"cuda_device": -1,
+		"cuda_device": 0,
 		"optimizer": {
 			"type": "adam", 
 			"lr": 0.001
