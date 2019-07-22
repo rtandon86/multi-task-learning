@@ -51,6 +51,7 @@ from unarylstm.chunk_tagger import ChunkSimpleTagger
 from unarylstm.lstm_swag import LstmSwag
 from unarylstm.pos_chunk import LayerPOSChunk
 from unarylstm.pos_chunk_deppar import LayerPOSChunkDeppar
+from unarylstm.pos_chunk_deppar_lm import LayerPOSChunkDepparLM
 from unarylstm.pos_chunk_lm import LayerPOSChunkLM
 from unarylstm.sampler_multi_task_trainer import SamplerMultiTaskTrainer
 
