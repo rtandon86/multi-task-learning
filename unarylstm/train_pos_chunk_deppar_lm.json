@@ -193,12 +193,12 @@
         },
         "deppar": {
 			"encoder": {
-				"type": "stacked_bidirectional_lstm",
-                "input_size": 1488,
+				"type": "lstm",
+				"bidirectional": true,
+                "input_size": 1388,
                 "hidden_size": 400,
                 "num_layers": 3,
-                "recurrent_dropout_probability": 0.3,
-                "use_highway": true
+                "dropout": 0.3
             },
             "pos_tag_embedding": {
                 "embedding_dim": 100,
@@ -243,8 +243,8 @@
 	"multi_task_trainer": {
 		"type": "sampler_multi_task_trainer",
 		"sampling_method": "proportional",
-		"patience": 10,
-		"num_epochs": 40,
+		"patience": 5,
+		"num_epochs": 25,
 		"min_lr": "1e-7",
 		"grad_norm": 5.0,
 		"grad_clipping": 10.0,

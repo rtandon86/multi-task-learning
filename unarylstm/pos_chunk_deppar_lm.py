@@ -136,7 +136,7 @@ class LayerPOSChunkDepparLM(Model):
                                         encoder=self._encoder_deppar,
                                         tag_representation_dim= parser_deppar_params.pop_int("tag_representation_dim"),
                                         arc_representation_dim= parser_deppar_params.pop_int("arc_representation_dim"),
-                                        pos_tag_embedding = embedding,
+                                        pos_tag_embedding = None,
                                         use_mst_decoding_for_validation = parser_deppar_params.pop("use_mst_decoding_for_validation"),
                                         dropout = parser_deppar_params.pop_float("dropout"),
                                         input_dropout = parser_deppar_params.pop_float("input_dropout"),
@@ -153,9 +153,10 @@ class LayerPOSChunkDepparLM(Model):
         encoder_lm_params = lm_params.pop("encoder")
         encoder_lm = Seq2SeqEncoder.from_params(encoder_lm_params)
         self._encoder_lm = encoder_lm
-
+        test_previous_encoders=[self._encoder_pos, self._encoder_chunk, self._encoder_deppar]
+       
         shortcut_text_field_embedder_lm = ShortcutConnectTextFieldEmbedder(
-            base_text_field_embedder=self._text_field_embedder, previous_encoders=[self._encoder_pos, self._encoder_chunk, self._encoder_deppar]
+            base_text_field_embedder=self._text_field_embedder, previous_encoders=test_previous_encoders
         )
         self._shortcut_text_field_embedder_lm = shortcut_text_field_embedder_lm
 
