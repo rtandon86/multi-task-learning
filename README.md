@@ -20,7 +20,7 @@ To ensure the code runs successfully please install all the packages mentioned i
 
 Example Usage
 ------------
-The implementation is based on the AllenNLP library. For an introduction to this library, you should check these tutorials.
+The implementation is based on the AllenNLP library. For an introduction to this library, you should check the tutorials.
 
 An experiment is defined in a json configuration file (see configs/*.json for examples). The configuration file mainly describes the datasets to load, the model to create along with all the hyper-parameters of the model.
 
