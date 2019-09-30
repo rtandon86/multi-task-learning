@@ -1,0 +1,69 @@
+{
+    "dataset_reader": {
+        "type": "pos_reader_test",
+        "use_pos_tags": true,
+		"label_namespace": "pos_labels",
+		"lazy": false,
+		"token_indexers": {
+			"tokens": {
+				"type": "single_id",
+				"lowercase_tokens": true
+            },
+            "token_characters": {
+                "type": "characters"
+            }
+        }
+    },
+    "train_data_path": "./mtl_data/pos/data/train/",
+    "validation_data_path": "./mtl_data/pos/data/validation/",
+    "test_data_path": "./mtl_data/pos/data/test/",
+    "evaluate_on_test": true,
+    "datasets_for_vocab_creation": ["train"],
+    "model": {
+        "type": "pos_simple_tagger",		
+		"text_field_embedder": {
+			"token_embedders": {
+				"tokens": {
+					"type": "embedding",
+					"embedding_dim": 50
+				},
+				"token_characters": {
+                    "type": "character_encoding",
+                    "embedding": {
+                        "embedding_dim": 8
+                    },
+                    "encoder": {
+                        "type": "cnn",
+                        "embedding_dim": 8,
+                        "num_filters": 50,
+                        "ngram_filter_sizes": [3]
+                    },
+                    "dropout": 0.2
+                }
+			}
+		},
+		"encoder": {
+			"type": "lstm",
+			"bidirectional": true,
+			"input_size": 100,
+			"hidden_size": 100,
+			"num_layers": 2,
+			"dropout": 0.2
+        },
+        "label_namespace": "pos_labels"
+    },
+    "iterator": {
+        "type": "bucket",
+        "sorting_keys": [["tokens","num_tokens"]],
+        "batch_size": 32
+    },
+    "trainer": {
+        "optimizer": {
+            "type": "adam",
+            "lr": 0.001
+        },
+        "patience": 10,
+        "num_epochs": 40,
+        "cuda_device": -1
+    }
+}
