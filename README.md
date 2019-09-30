@@ -12,7 +12,7 @@ SWAG
 
 Environment Set Up
 ------------
-The main dependencies are:
+The main dependencies are:  
 AllenNLP  
 PyTorch
 
