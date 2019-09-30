@@ -6,14 +6,14 @@ MTL has proven effective in NLP for incorporating inductive bias. Linguistic hie
 
 Data  
 ------------
-Penn Treebank: Wall Street Journal Portion
-CoNLL-2000
+Penn Treebank: Wall Street Journal Portion  
+CoNLL-2000  
 SWAG
 
 Environment Set Up
 ------------
 The main dependencies are:
-AllenNLP
+AllenNLP  
 PyTorch
 
 To ensure the code runs successfully please install all the packages mentioned in requirements.txt file.
